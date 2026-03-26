@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %}Проекты — Delo-Color{% endblock %}
+
+{% block content %}
+<div x-data="projectsApp()">
+    <!-- Header -->
+    <div class="flex items-center justify-end mb-6">
+        <button @click="showCreateModal = true" class="btn-pill btn-blue">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14m-7-7h14"/></svg>
+            Новый проект
+        </button>
+    </div>
+
+    {% if projects %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {% for p in projects %}
+        <a href="/projects/{{ p.id }}" class="project-card bg-white p-5 flex flex-col justify-between min-h-[120px] block">
+            <div>
+                <h2 class="text-base font-semibold text-gray-800 mb-1">{{ p.name }}</h2>
+                <p class="text-sm text-gray-400">
+                    {{ p.image_count }} фото
+                    <span class="mx-1">&middot;</span>
+                    {{ p.created_at[:10] if p.created_at else '' }}
+                </p>
+            </div>
+            <div class="flex justify-end mt-3">
+                <button @click.prevent="confirmDelete('{{ p.id }}', '{{ p.name }}')"
+                        class="text-sm text-red-400 hover:text-red-600 transition">
+                    Удалить
+                </button>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-32">
+        <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="none" fill="currentColor" opacity="0.08"/>
+            <path d="M7 21v-2a4 4 0 014-4h0" stroke-linecap="round"/>
+            <circle cx="12" cy="7" r="3"/>
+            <path d="M17 14l-2 2m0 0l-2 2m2-2l2 2m-2-2l-2-2" stroke-linecap="round"/>
+            <path d="M4.5 10.5Q6 8 8.5 9t3 3.5Q14 10 16 11t3.5 2" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+            <circle cx="8" cy="8" r="1.5" fill="currentColor" opacity="0.15"/>
+            <circle cx="16" cy="6" r="1" fill="currentColor" opacity="0.15"/>
+            <circle cx="12" cy="12" r="1.2" fill="currentColor" opacity="0.15"/>
+        </svg>
+        <p class="text-base text-gray-400 mb-1">Нет проектов</p>
+        <p class="text-sm text-gray-300">Создайте первый проект для начала работы</p>
+    </div>
+    {% endif %}
+
+    <!-- Create Modal -->
+    <div x-show="showCreateModal" x-cloak
+         class="fixed inset-0 modal-overlay flex items-center justify-center z-50"
+         @keydown.escape.window="showCreateModal = false">
+        <div class="modal-box bg-white p-8 w-full max-w-md" @click.away="showCreateModal = false">
+            <h3 class="text-xl font-bold text-gray-800 mb-5">Новый проект</h3>
+            <input x-ref="nameInput" x-model="newName" @keydown.enter="createProject()"
+                   type="text" placeholder="Название проекта"
+                   class="modal-input mb-6">
+            <div class="flex justify-end items-center gap-3">
+                <button @click="showCreateModal = false" class="btn-pill btn-ghost text-base">Отмена</button>
+                <button @click="createProject()" class="btn-pill btn-blue"
+                        :disabled="!newName.trim()">Создать</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirm Modal -->
+    <div x-show="showDeleteModal" x-cloak
+         class="fixed inset-0 modal-overlay flex items-center justify-center z-50"
+         @keydown.escape.window="showDeleteModal = false">
+        <div class="modal-box bg-white p-8 w-full max-w-md" @click.away="showDeleteModal = false">
+            <h3 class="text-xl font-bold text-gray-800 mb-3">Удалить проект?</h3>
+            <p class="text-gray-400 mb-6">
+                Проект «<span x-text="deleteName"></span>» и все файлы будут удалены безвозвратно.
+            </p>
+            <div class="flex justify-end items-center gap-3">
+                <button @click="showDeleteModal = false" class="btn-pill btn-ghost text-base">Отмена</button>
+                <button @click="doDelete()" class="btn-pill btn-red">Удалить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function projectsApp() {
+    return {
+        showCreateModal: false,
+        showDeleteModal: false,
+        newName: '',
+        deleteId: '',
+        deleteName: '',
+
+        async createProject() {
+            const name = this.newName.trim();
+            if (!name) return;
+            const res = await fetch('/api/projects', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({name}),
+            });
+            if (res.ok) {
+                const data = await res.json();
+                window.location.href = '/projects/' + data.id;
+            }
+        },
+        confirmDelete(id, name) {
+            this.deleteId = id;
+            this.deleteName = name;
+            this.showDeleteModal = true;
+        },
+        async doDelete() {
+            await fetch('/api/projects/' + this.deleteId, {method: 'DELETE'});
+            this.showDeleteModal = false;
+            window.location.reload();
+        },
+    };
+}
+</script>
+{% endblock %}

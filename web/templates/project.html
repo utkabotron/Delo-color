@@ -1,0 +1,453 @@
+{% extends "base.html" %}
+{% block title %}{{ project.name }} — Delo-Color{% endblock %}
+
+{% block content %}
+<div x-data="projectApp()" x-init="startPolling()">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-3">
+            <a href="/" class="text-blue-500 hover:text-blue-700 flex items-center gap-1 text-sm font-medium">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Назад
+            </a>
+            <h1 class="text-2xl font-bold text-gray-800">{{ project.name }}</h1>
+        </div>
+        <span x-show="busy" class="flex items-center gap-2 text-sm text-amber-500 font-medium">
+            <span class="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></span>
+            Обработка...
+        </span>
+    </div>
+
+    <!-- Upload zone — full when no images, compact when images exist -->
+    <section x-show="images.length === 0" class="mb-6">
+        <div class="upload-zone p-16 text-center cursor-pointer"
+             @dragover.prevent="dragOver = true"
+             @dragleave.prevent="dragOver = false"
+             @drop.prevent="handleDrop($event)"
+             @click="$refs.fileInputFull.click()"
+             :class="{'active': dragOver}">
+            <svg class="w-10 h-10 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 16V4m0 0l-4 4m4-4l4 4" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 16v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <p class="text-gray-400 mb-3">Перетащите фото сюда</p>
+            <p class="text-gray-300 text-sm mb-4">или</p>
+            <span class="btn-pill btn-blue">Выбрать файлы</span>
+            <input x-ref="fileInputFull" type="file" multiple accept="image/*" class="hidden" @change="handleFiles($event)">
+        </div>
+    </section>
+
+    <section x-show="images.length > 0" class="mb-6">
+        <div class="upload-zone px-5 py-3 flex items-center gap-3 cursor-pointer"
+             @dragover.prevent="dragOver = true"
+             @dragleave.prevent="dragOver = false"
+             @drop.prevent="handleDrop($event)"
+             @click="$refs.fileInputCompact.click()"
+             :class="{'active': dragOver}">
+            <svg class="w-5 h-5 text-gray-300 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 16V4m0 0l-4 4m4-4l4 4" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 16v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="text-gray-400 text-sm">Перетащите фото или нажмите для выбора</span>
+            <input x-ref="fileInputCompact" type="file" multiple accept="image/*" class="hidden" @change="handleFiles($event)">
+        </div>
+    </section>
+
+    <!-- Images gallery -->
+    <section class="mb-6" x-show="images.length > 0">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-base font-semibold text-gray-800">
+                Изображения (<span x-text="images.length"></span>)
+            </h2>
+            <div class="flex items-center gap-3">
+                <label x-show="aiAvailable" class="flex items-center gap-1.5 text-sm text-gray-500 cursor-pointer">
+                    <input type="checkbox" x-model="useAiMask" class="rounded border-gray-300">
+                    <span>AI-маска</span>
+                </label>
+                <button @click="generateMasks()" :disabled="busy || !hasUnmasked" class="btn-pill btn-green">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Создать маски
+                </button>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <template x-for="img in images" :key="img.id">
+                <div class="relative group">
+                    <div class="img-card aspect-[4/3] flex items-center justify-center relative">
+                        <img :src="'/data/projects/{{ project.id }}/originals/' + img.filename"
+                             class="w-full h-full object-cover"
+                             @error="$el.style.display='none'">
+                        <!-- Placeholder icon when no image loaded -->
+                        <svg class="absolute w-10 h-10 text-gray-300 pointer-events-none" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        <!-- Status badge — top left -->
+                        <div class="absolute top-2 left-2">
+                            <span x-show="img.status === 'uploaded'" class="badge bg-gray-400">Загружено</span>
+                            <span x-show="img.status === 'masking'" class="badge bg-amber-400 animate-pulse">Маска...</span>
+                            <span x-show="img.status === 'masked'" class="badge bg-green-500">Маска OK</span>
+                            <span x-show="img.status === 'recoloring'" class="badge bg-blue-500 animate-pulse">Красим...</span>
+                            <span x-show="img.status === 'done'" class="badge bg-purple-500">Готово</span>
+                            <span x-show="img.status === 'error'" class="badge bg-red-500">Ошибка</span>
+                        </div>
+                        <!-- Delete -->
+                        <button @click="deleteImage(img.id)"
+                                class="absolute top-2 right-2 bg-black/40 hover:bg-red-500 text-white rounded-full w-6 h-6 text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round"/></svg>
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1.5 truncate" x-text="img.filename"></p>
+                </div>
+            </template>
+        </div>
+    </section>
+
+    <!-- Color selection + recolor -->
+    <section class="mb-6" x-show="hasMasked || (recolorMode === 'ai' && images.length > 0)">
+        <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-4">
+                <h2 class="text-base font-semibold text-gray-800">Выбор цветов RAL</h2>
+                <!-- Filter tabs -->
+                <div class="flex items-center gap-1 bg-gray-100 rounded-full p-0.5">
+                    <button @click="colorFilter = 'catalog'"
+                            class="text-xs px-3 py-1 rounded-full transition font-medium"
+                            :class="colorFilter === 'catalog' ? 'bg-white text-gray-800 shadow-sm' : 'text-gray-500'">
+                        Каталог
+                    </button>
+                    <button @click="colorFilter = 'all'"
+                            class="text-xs px-3 py-1 rounded-full transition font-medium"
+                            :class="colorFilter === 'all' ? 'bg-white text-gray-800 shadow-sm' : 'text-gray-500'">
+                        Все RAL
+                    </button>
+                </div>
+            </div>
+            <div class="flex gap-3">
+                <button @click="selectAllVisible()" class="text-sm text-blue-500 hover:text-blue-700 font-medium">Все</button>
+                <button @click="selectedColors = []" class="text-sm text-gray-400 hover:text-gray-600">Снять все</button>
+            </div>
+        </div>
+
+        <!-- Group filter (only in 'all' mode) -->
+        <div x-show="colorFilter === 'all'" class="flex flex-wrap gap-1.5 mb-3">
+            <button @click="groupFilter = 'all'"
+                    class="text-xs px-2.5 py-1 rounded-full transition"
+                    :class="groupFilter === 'all' ? 'bg-blue-100 text-blue-600 font-medium' : 'bg-gray-100 text-gray-400 hover:bg-gray-200'">
+                Все
+            </button>
+            <template x-for="g in groups" :key="g.id">
+                <button @click="groupFilter = g.id"
+                        class="text-xs px-2.5 py-1 rounded-full transition"
+                        :class="groupFilter === g.id ? 'bg-blue-100 text-blue-600 font-medium' : 'bg-gray-100 text-gray-400 hover:bg-gray-200'"
+                        x-text="g.name">
+                </button>
+            </template>
+        </div>
+
+        <!-- Color swatches -->
+        <div class="grid grid-cols-7 md:grid-cols-10 lg:grid-cols-13 gap-3 mb-5">
+            <template x-for="c in filteredColors" :key="c.code">
+                <label class="cursor-pointer swatch"
+                       :class="selectedColors.includes(c.code) ? 'swatch-selected rounded-xl' : ''"
+                       @contextmenu.prevent="openColorSettings(c)">
+                    <input type="checkbox" :value="c.code" x-model="selectedColors" class="hidden">
+                    <div class="flex flex-col items-center p-2 rounded-xl relative">
+                        <div class="w-10 h-10 rounded-full mb-1.5 shadow-sm"
+                             :style="'background-color:' + (c.photo_hex || c.hex)"
+                             :class="c.hex === '#F4F4F4' || c.hex === '#FFFFFF' || c.hex === '#F6F6F6' || c.hex === '#FDF4E3' || c.hex === '#E7EBDA' || c.hex === '#EAE6CA' ? 'border-2 border-gray-200' : 'border border-transparent'">
+                        </div>
+                        <span class="text-[10px] text-gray-500 text-center leading-tight truncate w-full font-mono"
+                              x-text="c.code.replace('RAL','')"></span>
+                        <!-- Calibrated indicator -->
+                        <div x-show="c.has_reference" class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 rounded-full border border-white" title="Откалиброван"></div>
+                        <div x-show="c.is_catalog && colorFilter === 'all' && !c.has_reference" class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-blue-400 rounded-full"></div>
+                    </div>
+                </label>
+            </template>
+        </div>
+
+        <!-- Color settings modal (right-click on color) -->
+        <div x-show="colorModal" x-cloak
+             class="fixed inset-0 modal-overlay flex items-center justify-center z-50"
+             @keydown.escape.window="colorModal = null">
+            <div class="modal-box bg-white p-6 w-full max-w-sm" @click.away="colorModal = null">
+                <template x-if="colorModal">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-full shadow"
+                                 :style="'background-color:' + (colorModal.photo_hex || colorModal.hex)"></div>
+                            <div>
+                                <h3 class="font-bold text-gray-800" x-text="colorModal.code"></h3>
+                                <p class="text-sm text-gray-500" x-text="colorModal.name_ru"></p>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-400 mb-1">
+                            hex: <span x-text="colorModal.hex" class="font-mono"></span>
+                            <template x-if="colorModal.photo_hex">
+                                <span> → <span x-text="colorModal.photo_hex" class="font-mono text-green-600"></span> (калибр.)</span>
+                            </template>
+                        </div>
+                        <p x-show="colorModal.color_description" class="text-sm text-gray-600 mb-3" x-text="colorModal.color_description"></p>
+
+                        <div class="border-t pt-3 mt-3">
+                            <p class="text-sm font-medium text-gray-700 mb-2">Эталонное фото</p>
+                            <p class="text-xs text-gray-400 mb-2">Загрузите фото реального изделия в этом цвете. AI проанализирует и откалибрует.</p>
+                            <div class="flex gap-2">
+                                <label class="btn-pill btn-blue text-sm cursor-pointer">
+                                    Загрузить
+                                    <input type="file" accept="image/*" class="hidden" @change="uploadReference($event)">
+                                </label>
+                                <button x-show="colorModal.has_reference" @click="deleteReference()" class="btn-pill btn-ghost text-sm text-red-500">Удалить</button>
+                            </div>
+                            <p x-show="refUploading" class="text-sm text-amber-500 mt-2 animate-pulse">Анализ цвета...</p>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- Recolor action -->
+        <div class="flex items-center justify-between flex-wrap gap-3">
+            <div class="flex items-center gap-4">
+                <!-- Recolor mode toggle -->
+                <div x-show="aiAvailable" class="flex items-center gap-1 bg-gray-100 rounded-full p-0.5">
+                    <button @click="recolorMode = 'hsl'"
+                            class="text-xs px-3 py-1.5 rounded-full transition font-medium"
+                            :class="recolorMode === 'hsl' ? 'bg-white text-gray-800 shadow-sm' : 'text-gray-500'">
+                        HSL (маска)
+                    </button>
+                    <button @click="recolorMode = 'ai'"
+                            class="text-xs px-3 py-1.5 rounded-full transition font-medium"
+                            :class="recolorMode === 'ai' ? 'bg-white text-purple-600 shadow-sm' : 'text-gray-500'">
+                        AI (Gemini)
+                    </button>
+                </div>
+                <span x-show="selectedColors.length > 0" class="text-sm text-gray-400">
+                    <span x-text="selectedColors.length"></span> &times;
+                    <span x-text="recolorMode === 'ai' ? images.length : images.filter(i => i.has_mask).length"></span> фото =
+                    <span x-text="selectedColors.length * (recolorMode === 'ai' ? images.length : images.filter(i => i.has_mask).length)"></span> результатов
+                    <span x-show="recolorMode === 'ai'" class="text-purple-500">(~<span x-text="selectedColors.length * (recolorMode === 'ai' ? images.length : images.filter(i => i.has_mask).length) * 5"></span> сек)</span>
+                </span>
+            </div>
+            <button @click="startRecolor()" :disabled="busy || selectedColors.length === 0 || (recolorMode === 'hsl' && !hasMasked)" class="btn-pill btn-purple">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Перекрасить (<span x-text="selectedColors.length"></span> цветов)
+            </button>
+        </div>
+        <p x-show="recolorMode === 'ai'" class="text-xs text-purple-400 mt-2">
+            AI-режим: Gemini перекрашивает напрямую, маски не нужны. Качественнее, но ~5 сек/цвет.
+        </p>
+    </section>
+
+    <!-- Results -->
+    <section class="mb-6" x-show="results.length > 0">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-base font-semibold text-gray-800">
+                Результаты (<span x-text="results.length"></span>)
+            </h2>
+            <a href="/api/projects/{{ project.id }}/download" class="btn-pill btn-dark text-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v12m0 0l-4-4m4 4l4-4" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 16v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Скачать ZIP
+            </a>
+        </div>
+        <!-- Grouped by original image -->
+        <template x-for="group in resultGroups" :key="group.original">
+            <div class="mb-5">
+                <p class="text-sm font-medium text-gray-500 mb-2" x-text="group.original"></p>
+                <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
+                    <template x-for="r in group.items" :key="r.id">
+                        <a :href="'/data/projects/{{ project.id }}/results/' + r.filename" target="_blank" class="block">
+                            <img :src="'/data/projects/{{ project.id }}/results/' + r.filename"
+                                 class="result-thumb w-full aspect-[4/3] object-cover">
+                            <p class="text-[10px] text-gray-400 text-center mt-1 truncate" x-text="r.ral_code"></p>
+                        </a>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </section>
+
+    <!-- Lightbox -->
+    <div x-show="lightbox" x-cloak @click="lightbox = null" @keydown.escape.window="lightbox = null"
+         class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 cursor-pointer">
+        <img :src="lightbox" class="max-w-[90vw] max-h-[90vh] rounded-xl shadow-2xl">
+    </div>
+</div>
+
+<script>
+function projectApp() {
+    const ralLibrary = {{ ral_library | tojson }};
+
+    const allColors = Object.entries(ralLibrary).map(([code, info]) => {
+        // Short name for display (truncate to ~5 chars)
+        const full = info.name_ru || '';
+        let short = full;
+        if (full.length > 6) {
+            short = full.substring(0, 5) + '.';
+        }
+        return {
+            code,
+            hex: info.hex,
+            photo_hex: info.photo_hex || null,
+            name_ru: info.name_ru,
+            name_short: short,
+            group: info.group,
+            is_catalog: (info.catalog || []).includes('delo-design'),
+            has_reference: !!info.reference,
+            color_description: info.color_description || null,
+        };
+    });
+
+    const groups = [
+        {id: '1xxx', name: 'Жёлтые'},
+        {id: '2xxx', name: 'Оранжевые'},
+        {id: '3xxx', name: 'Красные'},
+        {id: '4xxx', name: 'Фиолетовые'},
+        {id: '5xxx', name: 'Синие'},
+        {id: '6xxx', name: 'Зелёные'},
+        {id: '7xxx', name: 'Серые'},
+        {id: '8xxx', name: 'Коричневые'},
+        {id: '9xxx', name: 'Белые/чёрные'},
+    ];
+
+    return {
+        images: {{ images | tojson }},
+        results: Object.values({{ results_by_image | tojson }}).flat(),
+        selectedColors: [],
+        busy: {{ 'true' if busy else 'false' }},
+        aiAvailable: {{ 'true' if ai_available else 'false' }},
+        useAiMask: false,
+        recolorMode: '{{ "ai" if ai_available else "hsl" }}',
+        colorModal: null,
+        refUploading: false,
+        dragOver: false,
+        lightbox: null,
+        pollTimer: null,
+        colorFilter: 'catalog',
+        groupFilter: 'all',
+        allColors,
+        groups,
+
+        get hasUnmasked() {
+            return this.images.some(i => !i.has_mask && i.status !== 'error');
+        },
+        get hasMasked() {
+            return this.images.some(i => i.has_mask);
+        },
+        get filteredColors() {
+            let list = this.allColors;
+            if (this.colorFilter === 'catalog') {
+                list = list.filter(c => c.is_catalog);
+            } else if (this.groupFilter !== 'all') {
+                list = list.filter(c => c.group === this.groupFilter);
+            }
+            return list;
+        },
+        get resultGroups() {
+            const map = {};
+            for (const r of this.results) {
+                const key = r.original || r.filename.split('_')[0];
+                if (!map[key]) map[key] = {original: key, items: []};
+                map[key].items.push(r);
+            }
+            return Object.values(map);
+        },
+
+        openColorSettings(c) {
+            this.colorModal = {...c};
+        },
+        async uploadReference(e) {
+            if (!this.colorModal || !e.target.files[0]) return;
+            this.refUploading = true;
+            const fd = new FormData();
+            fd.append('file', e.target.files[0]);
+            try {
+                const res = await fetch('/api/colors/' + this.colorModal.code + '/reference', {
+                    method: 'POST', body: fd,
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    // Update local color data
+                    const idx = this.allColors.findIndex(c => c.code === this.colorModal.code);
+                    if (idx >= 0) {
+                        this.allColors[idx].photo_hex = data.photo_hex;
+                        this.allColors[idx].color_description = data.color_description;
+                        this.allColors[idx].has_reference = true;
+                    }
+                    this.colorModal.photo_hex = data.photo_hex;
+                    this.colorModal.color_description = data.color_description;
+                    this.colorModal.has_reference = true;
+                }
+            } catch (err) { console.error(err); }
+            this.refUploading = false;
+            e.target.value = '';
+        },
+        async deleteReference() {
+            if (!this.colorModal) return;
+            await fetch('/api/colors/' + this.colorModal.code + '/reference', {method: 'DELETE'});
+            const idx = this.allColors.findIndex(c => c.code === this.colorModal.code);
+            if (idx >= 0) {
+                this.allColors[idx].has_reference = false;
+                this.allColors[idx].color_description = null;
+            }
+            this.colorModal.has_reference = false;
+            this.colorModal.color_description = null;
+        },
+
+        selectAllVisible() {
+            const codes = this.filteredColors.map(c => c.code);
+            const set = new Set([...this.selectedColors, ...codes]);
+            this.selectedColors = [...set];
+        },
+
+        startPolling() {
+            this.pollTimer = setInterval(() => this.poll(), 2000);
+        },
+        async poll() {
+            try {
+                const res = await fetch('/api/projects/{{ project.id }}/status');
+                if (!res.ok) return;
+                const data = await res.json();
+                this.images = data.images;
+                this.results = data.results;
+                this.busy = data.busy;
+            } catch (e) { /* server unavailable, skip */ }
+        },
+
+        async handleFiles(e) {
+            await this.uploadFiles(e.target.files);
+            e.target.value = '';
+        },
+        async handleDrop(e) {
+            this.dragOver = false;
+            await this.uploadFiles(e.dataTransfer.files);
+        },
+        async uploadFiles(fileList) {
+            const fd = new FormData();
+            for (const f of fileList) fd.append('files', f);
+            const res = await fetch('/api/projects/{{ project.id }}/upload', {
+                method: 'POST', body: fd,
+            });
+            if (res.ok) await this.poll();
+        },
+
+        async deleteImage(id) {
+            await fetch('/api/images/' + id, {method: 'DELETE'});
+            await this.poll();
+        },
+
+        async generateMasks() {
+            this.busy = true;
+            await fetch('/api/projects/{{ project.id }}/generate-masks', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({use_ai: this.useAiMask}),
+            });
+        },
+
+        async startRecolor() {
+            this.busy = true;
+            await fetch('/api/projects/{{ project.id }}/recolor', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    colors: this.selectedColors,
+                    mode: this.recolorMode,
+                }),
+            });
+        },
+    };
+}
+</script>
+{% endblock %}

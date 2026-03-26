@@ -12,6 +12,7 @@
 """
 
 import argparse
+import json
 import os
 import sys
 
@@ -19,42 +20,114 @@ import cv2
 import numpy as np
 from PIL import Image
 
-# ─── 26 RAL-цветов каталога delo-design.com ────────────────────────────────
+# ─── Библиотека RAL-цветов ────────────────────────────────────────────────
 
-RAL_COLORS = {
-    "RAL9003": {"hex": "#F4F4F4", "name": "белый"},
-    "RAL3012": {"hex": "#C7846C", "name": "персиковый"},
-    "RAL2001": {"hex": "#BE4E20", "name": "оранжевый"},
-    "RAL8004": {"hex": "#8E4B2E", "name": "терракотовый"},
-    "RAL8017": {"hex": "#44322D", "name": "коричневый"},
-    "RAL1019": {"hex": "#9E9764", "name": "бежевый"},
-    "RAL1013": {"hex": "#E3D9C6", "name": "кремовый"},
-    "RAL1018": {"hex": "#F8F32B", "name": "желтый"},
-    "RAL1024": {"hex": "#AEA04B", "name": "горчичный"},
-    "RAL7034": {"hex": "#8F8B66", "name": "фисташковый"},
-    "RAL7009": {"hex": "#4D5645", "name": "серо-зеленый"},
-    "RAL6000": {"hex": "#316650", "name": "зеленый"},
-    "RAL6004": {"hex": "#1F3A3D", "name": "изумрудный"},
-    "RAL3004": {"hex": "#6B1C23", "name": "бордовый"},
-    "RAL3015": {"hex": "#DEA2A8", "name": "розовый"},
-    "RAL4009": {"hex": "#A18594", "name": "серо-фиолетовый"},
-    "RAL4005": {"hex": "#6C4675", "name": "сиреневый"},
-    "RAL4007": {"hex": "#4A192C", "name": "фиолетовый"},
-    "RAL5013": {"hex": "#1E2460", "name": "синий"},
-    "RAL5008": {"hex": "#26252D", "name": "серо-синий"},
-    "RAL7031": {"hex": "#474B4E", "name": "серо-голубой"},
-    "RAL7001": {"hex": "#8B9EA0", "name": "голубой"},
-    "RAL7045": {"hex": "#909090", "name": "светло-серый"},
-    "RAL7012": {"hex": "#4E5754", "name": "серый"},
-    "RAL7021": {"hex": "#2F3234", "name": "темно-серый"},
-    "RAL9005": {"hex": "#0A0A0A", "name": "черный"},
-}
+_RAL_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ral_colors.json")
+
+
+def load_ral_library(path: str = _RAL_JSON) -> dict:
+    """Загрузка полной библиотеки RAL из JSON."""
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    return data["colors"]
+
+
+def get_catalog_colors(tag: str = "delo-design") -> dict:
+    """Возвращает только каталожные цвета (помеченные тегом)."""
+    all_colors = load_ral_library()
+    return {
+        code: {"hex": info["hex"], "name": info["name_ru"]}
+        for code, info in all_colors.items()
+        if tag in info.get("catalog", [])
+    }
+
+
+def get_colors_by_codes(codes: list[str]) -> dict:
+    """Возвращает цвета по списку кодов из полной библиотеки."""
+    all_colors = load_ral_library()
+    result = {}
+    for code in codes:
+        if code in all_colors:
+            info = all_colors[code]
+            result[code] = {"hex": info["hex"], "name": info["name_ru"]}
+    return result
+
+
+# Обратная совместимость: RAL_COLORS = 26 каталожных цветов delo-design
+RAL_COLORS = get_catalog_colors()
 
 
 def hex_to_rgb(hex_color: str) -> tuple[int, int, int]:
     """#RRGGBB -> (R, G, B)."""
     h = hex_color.lstrip("#")
     return int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)
+
+
+# ─── Зоны исключения (AI) ──────────────────────────────────────────────────
+
+def apply_exclusion_zones(
+    mask: np.ndarray,
+    exclusion_zones: list[dict],
+    image_shape: tuple,
+    fade_px: int = 8,
+) -> np.ndarray:
+    """
+    Обнуляет маску в зонах исключения (bbox от Gemini Vision).
+    Внутри bbox маска = 0, по краям — плавный переход за fade_px пикселей.
+    """
+    h, w = image_shape[:2]
+    mask = mask.copy()
+
+    for zone in exclusion_zones:
+        bbox = zone.get("bbox", [])
+        if len(bbox) != 4:
+            continue
+
+        # Core zone (exact bbox)
+        cx1 = int(bbox[0] * w)
+        cy1 = int(bbox[1] * h)
+        cx2 = int(bbox[2] * w)
+        cy2 = int(bbox[3] * h)
+
+        # Expanded zone (with fade margin)
+        x1 = max(0, cx1 - fade_px)
+        y1 = max(0, cy1 - fade_px)
+        x2 = min(w, cx2 + fade_px)
+        y2 = min(h, cy2 + fade_px)
+
+        if x2 <= x1 or y2 <= y1:
+            continue
+
+        # Zero out the core zone completely
+        mask[cy1:cy2, cx1:cx2] = 0
+
+        # Fade margins: gradual transition from 0 (at core edge) to 1 (at fade edge)
+        # Top margin
+        if cy1 > y1:
+            for i in range(cy1 - y1):
+                factor = (i + 1) / (cy1 - y1 + 1)
+                row = y1 + i
+                mask[row, cx1:cx2] *= factor
+        # Bottom margin
+        if y2 > cy2:
+            for i in range(y2 - cy2):
+                factor = (i + 1) / (y2 - cy2 + 1)
+                row = y2 - 1 - i
+                mask[row, cx1:cx2] *= factor
+        # Left margin
+        if cx1 > x1:
+            for j in range(cx1 - x1):
+                factor = (j + 1) / (cx1 - x1 + 1)
+                col = x1 + j
+                mask[y1:y2, col] *= factor
+        # Right margin
+        if x2 > cx2:
+            for j in range(x2 - cx2):
+                factor = (j + 1) / (x2 - cx2 + 1)
+                col = x2 - 1 - j
+                mask[y1:y2, col] *= factor
+
+    return mask
 
 
 # ─── Маскирование ──────────────────────────────────────────────────────────
@@ -120,8 +193,7 @@ def generate_mask(
     try:
         from rembg import remove
     except ImportError:
-        print("ОШИБКА: rembg не установлен. Установите: pip install 'rembg[cpu]'")
-        sys.exit(1)
+        raise RuntimeError("rembg не установлен. Установите: pip install 'rembg[cpu]'")
 
     h, w = image_bgr.shape[:2]
 
@@ -152,6 +224,10 @@ def generate_mask(
     # Тени: пиксели вне силуэта rembg, но с малым deltaE — это тени, убираем
     shadow_zone = (rembg_binary == 0).astype(np.float32)
     combined = combined * (1 - shadow_zone)
+
+    # Заполнение дыр: если rembg уверен что это объект, а color_mask низкий
+    # (светлый объект на белом фоне), гарантируем минимальное значение маски
+    combined = np.maximum(combined, rembg_binary.astype(np.float32) * 0.85)
 
     # Шаг 4: Guided filter для чётких краёв
     print("  Шаг 4/4: Guided filter (уточнение краёв)...")
@@ -372,8 +448,9 @@ def main():
         help="Путь к готовой маске PNG (если не указан — генерируется автоматически)"
     )
     parser.add_argument(
-        "--colors", "-c", default="all",
-        help="'all' или коды через запятую: RAL9003,RAL5013 (по умолчанию: all)"
+        "--colors", "-c", default="catalog",
+        help="'catalog' (26 каталожных delo-design), 'all' (все 213 RAL) "
+             "или коды через запятую: RAL9003,RAL5013 (по умолчанию: catalog)"
     )
     parser.add_argument(
         "--threshold", "-t", type=float, default=15.0,
@@ -391,16 +468,21 @@ def main():
     args = parser.parse_args()
 
     # Определяем набор цветов
-    if args.colors.lower() == "all":
-        colors = RAL_COLORS
+    choice = args.colors.lower().strip()
+    if choice == "catalog":
+        colors = get_catalog_colors()
+    elif choice == "all":
+        all_lib = load_ral_library()
+        colors = {
+            code: {"hex": info["hex"], "name": info["name_ru"]}
+            for code, info in all_lib.items()
+        }
     else:
         codes = [c.strip().upper() for c in args.colors.split(",")]
-        colors = {}
-        for code in codes:
-            if code in RAL_COLORS:
-                colors[code] = RAL_COLORS[code]
-            else:
-                print(f"Предупреждение: неизвестный код {code}, пропускаю")
+        colors = get_colors_by_codes(codes)
+        unknown = [c for c in codes if c.upper() not in colors]
+        for code in unknown:
+            print(f"Предупреждение: неизв��стный код {code}, пропускаю")
         if not colors:
             print("ОШИБКА: не найдено ни одного валидного RAL-кода")
             sys.exit(1)

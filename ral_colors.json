@@ -1,0 +1,1625 @@
+{
+  "meta": {
+    "source": "ralcolor.com / colorscheme.ru (sRGB approximation)",
+    "total": 213,
+    "catalog_tag": "delo-design",
+    "note": "HEX — sRGB аппроксимация, не эталон. Для контрактов используйте физический веер RAL K7/K5."
+  },
+  "groups": [
+    {
+      "id": "1xxx",
+      "name": "Жёлтые и бежевые"
+    },
+    {
+      "id": "2xxx",
+      "name": "Оранжевые"
+    },
+    {
+      "id": "3xxx",
+      "name": "Красные"
+    },
+    {
+      "id": "4xxx",
+      "name": "Фиолетовые"
+    },
+    {
+      "id": "5xxx",
+      "name": "Синие"
+    },
+    {
+      "id": "6xxx",
+      "name": "Зелёные"
+    },
+    {
+      "id": "7xxx",
+      "name": "Серые"
+    },
+    {
+      "id": "8xxx",
+      "name": "Коричневые"
+    },
+    {
+      "id": "9xxx",
+      "name": "Белые и чёрные"
+    }
+  ],
+  "colors": {
+    "RAL1000": {
+      "hex": "#BEBD7F",
+      "name_ru": "Зелёно-бежевый",
+      "name_en": "Green beige",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1001": {
+      "hex": "#C2B078",
+      "name_ru": "Бежевый",
+      "name_en": "Beige",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1002": {
+      "hex": "#C6A664",
+      "name_ru": "Песочно-жёлтый",
+      "name_en": "Sand yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1003": {
+      "hex": "#E5BE01",
+      "name_ru": "Сигнальный жёлтый",
+      "name_en": "Signal yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1004": {
+      "hex": "#CDA434",
+      "name_ru": "Жёлто-золотой",
+      "name_en": "Golden yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1005": {
+      "hex": "#A98307",
+      "name_ru": "Медово-жёлтый",
+      "name_en": "Honey yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1006": {
+      "hex": "#E4A010",
+      "name_ru": "Кукурузно-жёлтый",
+      "name_en": "Maize yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1007": {
+      "hex": "#DC9D00",
+      "name_ru": "Нарциссово-жёлтый",
+      "name_en": "Daffodil yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1011": {
+      "hex": "#8A6642",
+      "name_ru": "Коричнево-бежевый",
+      "name_en": "Brown beige",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1012": {
+      "hex": "#C7B446",
+      "name_ru": "Лимонно-жёлтый",
+      "name_en": "Lemon yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1013": {
+      "hex": "#EAE6CA",
+      "name_ru": "Жемчужно-белый",
+      "name_en": "Oyster white",
+      "group": "1xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#E7E1B9"
+    },
+    "RAL1014": {
+      "hex": "#E1CC4F",
+      "name_ru": "Слоновая кость",
+      "name_en": "Ivory",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1015": {
+      "hex": "#E6D690",
+      "name_ru": "Светлая слоновая кость",
+      "name_en": "Light ivory",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1016": {
+      "hex": "#EDFF21",
+      "name_ru": "Жёлтая сера",
+      "name_en": "Sulfur yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1017": {
+      "hex": "#F5D033",
+      "name_ru": "Шафраново-жёлтый",
+      "name_en": "Saffron yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1018": {
+      "hex": "#F8F32B",
+      "name_ru": "Цинково-жёлтый",
+      "name_en": "Zinc yellow",
+      "group": "1xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#FFEF24"
+    },
+    "RAL1019": {
+      "hex": "#9E9764",
+      "name_ru": "Серо-бежевый",
+      "name_en": "Grey beige",
+      "group": "1xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#A4985E"
+    },
+    "RAL1020": {
+      "hex": "#999950",
+      "name_ru": "Оливково-жёлтый",
+      "name_en": "Olive yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1021": {
+      "hex": "#F3DA0B",
+      "name_ru": "Рапсово-жёлтый",
+      "name_en": "Rape yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1023": {
+      "hex": "#FAD201",
+      "name_ru": "Транспортно-жёлтый",
+      "name_en": "Traffic yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1024": {
+      "hex": "#AEA04B",
+      "name_ru": "Охра жёлтая",
+      "name_en": "Ochre yellow",
+      "group": "1xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#B8A141"
+    },
+    "RAL1026": {
+      "hex": "#FFFF00",
+      "name_ru": "Люминесцентный жёлтый",
+      "name_en": "Luminous yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1027": {
+      "hex": "#9D9101",
+      "name_ru": "Карри жёлтый",
+      "name_en": "Curry",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1028": {
+      "hex": "#F4A900",
+      "name_ru": "Дынно-жёлтый",
+      "name_en": "Melon yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1032": {
+      "hex": "#D6AE01",
+      "name_ru": "Жёлтый ракитник",
+      "name_en": "Broom yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1033": {
+      "hex": "#F3A505",
+      "name_ru": "Георгиново-жёлтый",
+      "name_en": "Dahlia yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1034": {
+      "hex": "#EFA94A",
+      "name_ru": "Пастельно-жёлтый",
+      "name_en": "Pastel yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1035": {
+      "hex": "#6A5D4D",
+      "name_ru": "Перламутрово-бежевый",
+      "name_en": "Pearl beige",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1036": {
+      "hex": "#705335",
+      "name_ru": "Перламутрово-золотой",
+      "name_en": "Pearl gold",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL1037": {
+      "hex": "#F39F18",
+      "name_ru": "Солнечно-жёлтый",
+      "name_en": "Sun yellow",
+      "group": "1xxx",
+      "catalog": []
+    },
+    "RAL2000": {
+      "hex": "#ED760E",
+      "name_ru": "Жёлто-оранжевый",
+      "name_en": "Yellow orange",
+      "group": "2xxx",
+      "catalog": []
+    },
+    "RAL2001": {
+      "hex": "#C93C20",
+      "name_ru": "Красно-оранжевый",
+      "name_en": "Red orange",
+      "group": "2xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#DA270F"
+    },
+    "RAL2002": {
+      "hex": "#CB2821",
+      "name_ru": "Алый",
+      "name_en": "Vermilion",
+      "group": "2xxx",
+      "catalog": []
+    },
+    "RAL2003": {
+      "hex": "#FF7514",
+      "name_ru": "Пастельно-оранжевый",
+      "name_en": "Pastel orange",
+      "group": "2xxx",
+      "catalog": []
+    },
+    "RAL2004": {
+      "hex": "#F44611",
+      "name_ru": "Оранжевый",
+      "name_en": "Pure orange",
+      "group": "2xxx",
+      "catalog": []
+    },
+    "RAL2005": {
+      "hex": "#FF2301",
+      "name_ru": "Люминесцентный оранжевый",
+      "name_en": "Luminous orange",
+      "group": "2xxx",
+      "catalog": []
+    },
+    "RAL2007": {
+      "hex": "#FFA420",
+      "name_ru": "Люминесцентный ярко-оранжевый",
+      "name_en": "Luminous bright orange",
+      "group": "2xxx",
+      "catalog": []
+    },
+    "RAL2008": {
+      "hex": "#F75E25",
+      "name_ru": "Ярко-красно-оранжевый",
+      "name_en": "Bright red orange",
+      "group": "2xxx",
+      "catalog": []
+    },
+    "RAL2009": {
+      "hex": "#F54021",
+      "name_ru": "Транспортный оранжевый",
+      "name_en": "Traffic orange",
+      "group": "2xxx",
+      "catalog": []
+    },
+    "RAL2010": {
+      "hex": "#D84B20",
+      "name_ru": "Сигнальный оранжевый",
+      "name_en": "Signal orange",
+      "group": "2xxx",
+      "catalog": []
+    },
+    "RAL2011": {
+      "hex": "#EC7C26",
+      "name_ru": "Насыщенный оранжевый",
+      "name_en": "Deep orange",
+      "group": "2xxx",
+      "catalog": []
+    },
+    "RAL2012": {
+      "hex": "#E55137",
+      "name_ru": "Лососёво-оранжевый",
+      "name_en": "Salmon range",
+      "group": "2xxx",
+      "catalog": []
+    },
+    "RAL2013": {
+      "hex": "#C35831",
+      "name_ru": "Перламутрово-оранжевый",
+      "name_en": "Pearl orange",
+      "group": "2xxx",
+      "catalog": []
+    },
+    "RAL3000": {
+      "hex": "#AF2B1E",
+      "name_ru": "Огненно-красный",
+      "name_en": "Flame red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3001": {
+      "hex": "#A52019",
+      "name_ru": "Сигнальный красный",
+      "name_en": "Signal red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3002": {
+      "hex": "#A2231D",
+      "name_ru": "Карминно-красный",
+      "name_en": "Carmine red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3003": {
+      "hex": "#9B111E",
+      "name_ru": "Рубиново-красный",
+      "name_en": "Ruby red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3004": {
+      "hex": "#75151E",
+      "name_ru": "Пурпурно-красный",
+      "name_en": "Purple red",
+      "group": "3xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#A51E1F"
+    },
+    "RAL3005": {
+      "hex": "#5E2129",
+      "name_ru": "Винно-красный",
+      "name_en": "Wine red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3007": {
+      "hex": "#412227",
+      "name_ru": "Чёрно-красный",
+      "name_en": "Black red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3009": {
+      "hex": "#642424",
+      "name_ru": "Оксид красный",
+      "name_en": "Oxide red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3011": {
+      "hex": "#781F19",
+      "name_ru": "Коричнево-красный",
+      "name_en": "Brown red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3012": {
+      "hex": "#C1876B",
+      "name_ru": "Бежево-красный",
+      "name_en": "Beige red",
+      "group": "3xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#CA7F62"
+    },
+    "RAL3013": {
+      "hex": "#A12312",
+      "name_ru": "Томатно-красный",
+      "name_en": "Tomato red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3014": {
+      "hex": "#D36E70",
+      "name_ru": "Розовый антик",
+      "name_en": "Antique pink",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3015": {
+      "hex": "#EA899A",
+      "name_ru": "Светло-розовый",
+      "name_en": "Light pink",
+      "group": "3xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#F47F9A"
+    },
+    "RAL3016": {
+      "hex": "#B32821",
+      "name_ru": "Кораллово-красный",
+      "name_en": "Coral red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3017": {
+      "hex": "#E63244",
+      "name_ru": "Розовый",
+      "name_en": "Rose",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3018": {
+      "hex": "#D53032",
+      "name_ru": "Клубнично-красный",
+      "name_en": "Strawberry red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3020": {
+      "hex": "#CC0605",
+      "name_ru": "Транспортный красный",
+      "name_en": "Traffic red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3022": {
+      "hex": "#D95030",
+      "name_ru": "Лососёво-красный",
+      "name_en": "Salmon pink",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3024": {
+      "hex": "#F80000",
+      "name_ru": "Люминесцентный красный",
+      "name_en": "Luminous red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3026": {
+      "hex": "#FE0000",
+      "name_ru": "Люминесцентный ярко-красный",
+      "name_en": "Luminous bright red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3027": {
+      "hex": "#C51D34",
+      "name_ru": "Малиново-красный",
+      "name_en": "Raspberry red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3028": {
+      "hex": "#CB3234",
+      "name_ru": "Красный",
+      "name_en": "Pure red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3031": {
+      "hex": "#B32428",
+      "name_ru": "Ориент красный",
+      "name_en": "Orient red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3032": {
+      "hex": "#721422",
+      "name_ru": "Перламутрово-рубиновый",
+      "name_en": "Pearl ruby red",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL3033": {
+      "hex": "#B44C43",
+      "name_ru": "Перламутрово-розовый",
+      "name_en": "Pearl pink",
+      "group": "3xxx",
+      "catalog": []
+    },
+    "RAL4001": {
+      "hex": "#6D3F5B",
+      "name_ru": "Красно-сиреневый",
+      "name_en": "Red lilac",
+      "group": "4xxx",
+      "catalog": []
+    },
+    "RAL4002": {
+      "hex": "#922B3E",
+      "name_ru": "Красно-фиолетовый",
+      "name_en": "Red violet",
+      "group": "4xxx",
+      "catalog": []
+    },
+    "RAL4003": {
+      "hex": "#DE4C8A",
+      "name_ru": "Вересково-фиолетовый",
+      "name_en": "Heather violet",
+      "group": "4xxx",
+      "catalog": []
+    },
+    "RAL4004": {
+      "hex": "#641C34",
+      "name_ru": "Бордово-фиолетовый",
+      "name_en": "Claret violet",
+      "group": "4xxx",
+      "catalog": []
+    },
+    "RAL4005": {
+      "hex": "#6C4675",
+      "name_ru": "Сине-сиреневый",
+      "name_en": "Blue lilac",
+      "group": "4xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#6F417A"
+    },
+    "RAL4006": {
+      "hex": "#A03472",
+      "name_ru": "Транспортный пурпурный",
+      "name_en": "Traffic purple",
+      "group": "4xxx",
+      "catalog": []
+    },
+    "RAL4007": {
+      "hex": "#4A192C",
+      "name_ru": "Пурпурно-фиолетовый",
+      "name_en": "Purple violet",
+      "group": "4xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#74273F"
+    },
+    "RAL4008": {
+      "hex": "#924E7D",
+      "name_ru": "Сигнальный фиолетовый",
+      "name_en": "Signal violet",
+      "group": "4xxx",
+      "catalog": []
+    },
+    "RAL4009": {
+      "hex": "#A18594",
+      "name_ru": "Пастельно-фиолетовый",
+      "name_en": "Pastel violet",
+      "group": "4xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#A48294"
+    },
+    "RAL4010": {
+      "hex": "#CF3476",
+      "name_ru": "Телемагента",
+      "name_en": "Telemagenta",
+      "group": "4xxx",
+      "catalog": []
+    },
+    "RAL4011": {
+      "hex": "#8673A1",
+      "name_ru": "Перламутрово-фиолетовый",
+      "name_en": "Pearl violet",
+      "group": "4xxx",
+      "catalog": []
+    },
+    "RAL4012": {
+      "hex": "#6C6874",
+      "name_ru": "Перламутрово-ежевичный",
+      "name_en": "Pearl black berry",
+      "group": "4xxx",
+      "catalog": []
+    },
+    "RAL5000": {
+      "hex": "#354D73",
+      "name_ru": "Фиолетово-синий",
+      "name_en": "Violet blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5001": {
+      "hex": "#1F3438",
+      "name_ru": "Зелёно-синий",
+      "name_en": "Green blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5002": {
+      "hex": "#20214F",
+      "name_ru": "Ультрамариново-синий",
+      "name_en": "Ultramarine blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5003": {
+      "hex": "#1D1E33",
+      "name_ru": "Сапфирово-синий",
+      "name_en": "Saphire blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5004": {
+      "hex": "#18171C",
+      "name_ru": "Чёрно-синий",
+      "name_en": "Black blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5005": {
+      "hex": "#1E2460",
+      "name_ru": "Сигнальный синий",
+      "name_en": "Signal blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5007": {
+      "hex": "#3E5F8A",
+      "name_ru": "Бриллиантово-синий",
+      "name_en": "Brillant blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5008": {
+      "hex": "#26252D",
+      "name_ru": "Серо-синий",
+      "name_en": "Grey blue",
+      "group": "5xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#343241"
+    },
+    "RAL5009": {
+      "hex": "#025669",
+      "name_ru": "Лазурно-синий",
+      "name_en": "Azure blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5010": {
+      "hex": "#0E294B",
+      "name_ru": "Горечавково-синий",
+      "name_en": "Gentian blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5011": {
+      "hex": "#231A24",
+      "name_ru": "Стально-синий",
+      "name_en": "Steel blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5012": {
+      "hex": "#3B83BD",
+      "name_ru": "Голубой",
+      "name_en": "Light blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5013": {
+      "hex": "#1E213D",
+      "name_ru": "Кобальтово-синий",
+      "name_en": "Cobalt blue",
+      "group": "5xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#222752"
+    },
+    "RAL5014": {
+      "hex": "#606E8C",
+      "name_ru": "Голубино-синий",
+      "name_en": "Pigeon blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5015": {
+      "hex": "#2271B3",
+      "name_ru": "Небесно-синий",
+      "name_en": "Sky blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5017": {
+      "hex": "#063971",
+      "name_ru": "Транспортный синий",
+      "name_en": "Traffic blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5018": {
+      "hex": "#3F888F",
+      "name_ru": "Бирюзово-синий",
+      "name_en": "Turquoise blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5019": {
+      "hex": "#1B5583",
+      "name_ru": "Капри синий",
+      "name_en": "Capri blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5020": {
+      "hex": "#1D334A",
+      "name_ru": "Океанская синь",
+      "name_en": "Ocean blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5021": {
+      "hex": "#256D7B",
+      "name_ru": "Водная синь",
+      "name_en": "Water blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5022": {
+      "hex": "#252850",
+      "name_ru": "Ночной синий",
+      "name_en": "Night blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5023": {
+      "hex": "#49678D",
+      "name_ru": "Отдалённо-синий",
+      "name_en": "Distant blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5024": {
+      "hex": "#5D9B9B",
+      "name_ru": "Пастельно-синий",
+      "name_en": "Pastel blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5025": {
+      "hex": "#2A6478",
+      "name_ru": "Перламутровый горечавково-синий",
+      "name_en": "Pearl gentian blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL5026": {
+      "hex": "#102C54",
+      "name_ru": "Перламутровый ночной синий",
+      "name_en": "Pearl night blue",
+      "group": "5xxx",
+      "catalog": []
+    },
+    "RAL6000": {
+      "hex": "#316650",
+      "name_ru": "Патиново-зелёный",
+      "name_en": "Patina green",
+      "group": "6xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#2B6C51"
+    },
+    "RAL6001": {
+      "hex": "#287233",
+      "name_ru": "Изумрудно-зелёный",
+      "name_en": "Emerald green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6002": {
+      "hex": "#2D572C",
+      "name_ru": "Лиственно-зелёный",
+      "name_en": "Leaf green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6003": {
+      "hex": "#424632",
+      "name_ru": "Оливково-зелёный",
+      "name_en": "Olive green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6004": {
+      "hex": "#1F3A3D",
+      "name_ru": "Сине-зелёный",
+      "name_en": "Blue green",
+      "group": "6xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#235D60",
+      "reference": "RAL6004.webp",
+      "color_description": "Глубокий и насыщенный сине-зелёный цвет.",
+      "hex_metal": "#225C5F",
+      "hex_fabric": "#245E61"
+    },
+    "RAL6005": {
+      "hex": "#2F4538",
+      "name_ru": "Зелёный мох",
+      "name_en": "Moss green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6006": {
+      "hex": "#3E3B32",
+      "name_ru": "Серо-оливковый",
+      "name_en": "Grey olive",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6007": {
+      "hex": "#343B29",
+      "name_ru": "Бутылочно-зелёный",
+      "name_en": "Bottle green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6008": {
+      "hex": "#39352A",
+      "name_ru": "Коричнево-зелёный",
+      "name_en": "Brown green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6009": {
+      "hex": "#31372B",
+      "name_ru": "Пихтовый зелёный",
+      "name_en": "Fir green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6010": {
+      "hex": "#35682D",
+      "name_ru": "Травяной зелёный",
+      "name_en": "Grass green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6011": {
+      "hex": "#587246",
+      "name_ru": "Резедово-зелёный",
+      "name_en": "Reseda green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6012": {
+      "hex": "#343E40",
+      "name_ru": "Чёрно-зелёный",
+      "name_en": "Black green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6013": {
+      "hex": "#6C7156",
+      "name_ru": "Тростниково-зелёный",
+      "name_en": "Reed green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6014": {
+      "hex": "#47402E",
+      "name_ru": "Жёлто-оливковый",
+      "name_en": "Yellow olive",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6015": {
+      "hex": "#3B3C36",
+      "name_ru": "Чёрно-оливковый",
+      "name_en": "Black olive",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6016": {
+      "hex": "#1E5945",
+      "name_ru": "Бирюзово-зелёный",
+      "name_en": "Turquoise green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6017": {
+      "hex": "#4C9141",
+      "name_ru": "Майский зелёный",
+      "name_en": "May green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6018": {
+      "hex": "#57A639",
+      "name_ru": "Желто-зелёный",
+      "name_en": "Yellow green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6019": {
+      "hex": "#BDECB6",
+      "name_ru": "Бело-зелёный",
+      "name_en": "Pastel green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6020": {
+      "hex": "#2E3A23",
+      "name_ru": "Хромовый зелёный",
+      "name_en": "Chrome green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6021": {
+      "hex": "#89AC76",
+      "name_ru": "Бледно-зелёный",
+      "name_en": "Pale green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6022": {
+      "hex": "#25221B",
+      "name_ru": "Коричнево-оливковый",
+      "name_en": "Olive drab",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6024": {
+      "hex": "#308446",
+      "name_ru": "Транспортный зелёный",
+      "name_en": "Traffic green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6025": {
+      "hex": "#3D642D",
+      "name_ru": "Папоротниково-зелёный",
+      "name_en": "Fern green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6026": {
+      "hex": "#015D52",
+      "name_ru": "Опаловый зелёный",
+      "name_en": "Opal green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6027": {
+      "hex": "#84C3BE",
+      "name_ru": "Светло-зелёный",
+      "name_en": "Light green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6028": {
+      "hex": "#2C5545",
+      "name_ru": "Сосновый зелёный",
+      "name_en": "Pine green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6029": {
+      "hex": "#20603D",
+      "name_ru": "Мятно-зелёный",
+      "name_en": "Mint green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6032": {
+      "hex": "#317F43",
+      "name_ru": "Сигнальный зелёный",
+      "name_en": "Signal green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6033": {
+      "hex": "#497E76",
+      "name_ru": "Мятно-бирюзовый",
+      "name_en": "Mint turquoise",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6034": {
+      "hex": "#7FB5B5",
+      "name_ru": "Пастельно-бирюзовый",
+      "name_en": "Pastel turquoise",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6035": {
+      "hex": "#1C542D",
+      "name_ru": "Перламутрово-зелёный",
+      "name_en": "Pearl green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6036": {
+      "hex": "#193737",
+      "name_ru": "Перламутровый опаловый зелёный",
+      "name_en": "Pearl opal green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6037": {
+      "hex": "#008F39",
+      "name_ru": "Зелёный",
+      "name_en": "Pure green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL6038": {
+      "hex": "#00BB2D",
+      "name_ru": "Люминесцентный зелёный",
+      "name_en": "Luminous green",
+      "group": "6xxx",
+      "catalog": []
+    },
+    "RAL7000": {
+      "hex": "#78858B",
+      "name_ru": "Серая белка",
+      "name_en": "Squirrel grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7001": {
+      "hex": "#8A9597",
+      "name_ru": "Серебристо-серый",
+      "name_en": "Silver grey",
+      "group": "7xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#87979A"
+    },
+    "RAL7002": {
+      "hex": "#7E7B52",
+      "name_ru": "Оливково-серый",
+      "name_en": "Olive grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7003": {
+      "hex": "#6C7059",
+      "name_ru": "Серый мох",
+      "name_en": "Moss grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7004": {
+      "hex": "#969992",
+      "name_ru": "Сигнальный серый",
+      "name_en": "Signal grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7005": {
+      "hex": "#646B63",
+      "name_ru": "Мышино-серый",
+      "name_en": "Mouse grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7006": {
+      "hex": "#6D6552",
+      "name_ru": "Бежево-серый",
+      "name_en": "Beige grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7008": {
+      "hex": "#6A5F31",
+      "name_ru": "Серое хаки",
+      "name_en": "Khaki grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7009": {
+      "hex": "#4D5645",
+      "name_ru": "Зелёно-серый",
+      "name_en": "Green grey",
+      "group": "7xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#4D5843"
+    },
+    "RAL7010": {
+      "hex": "#4C514A",
+      "name_ru": "Брезентово-серый",
+      "name_en": "Tarpaulin grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7011": {
+      "hex": "#434B4D",
+      "name_ru": "Железно-серый",
+      "name_en": "Iron grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7012": {
+      "hex": "#4E5754",
+      "name_ru": "Базальтово-серый",
+      "name_en": "Basalt grey",
+      "group": "7xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#4C5955"
+    },
+    "RAL7013": {
+      "hex": "#464531",
+      "name_ru": "Коричнево-серый",
+      "name_en": "Brown grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7015": {
+      "hex": "#434750",
+      "name_ru": "Сланцево-серый",
+      "name_en": "Slate grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7016": {
+      "hex": "#293133",
+      "name_ru": "Антрацитово-серый",
+      "name_en": "Anthracite grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7021": {
+      "hex": "#23282B",
+      "name_ru": "Чёрно-серый",
+      "name_en": "Black grey",
+      "group": "7xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#30393F"
+    },
+    "RAL7022": {
+      "hex": "#332F2C",
+      "name_ru": "Серая умбра",
+      "name_en": "Umbra grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7023": {
+      "hex": "#686C5E",
+      "name_ru": "Серый бетон",
+      "name_en": "Concrete grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7024": {
+      "hex": "#474A51",
+      "name_ru": "Графитовый серый",
+      "name_en": "Graphite grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7026": {
+      "hex": "#2F353B",
+      "name_ru": "Гранитовый серый",
+      "name_en": "Granite grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7030": {
+      "hex": "#8B8C7A",
+      "name_ru": "Каменно-серый",
+      "name_en": "Stone grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7031": {
+      "hex": "#474B4E",
+      "name_ru": "Сине-серый",
+      "name_en": "Blue grey",
+      "group": "7xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#454B50"
+    },
+    "RAL7032": {
+      "hex": "#B8B799",
+      "name_ru": "Галечный серый",
+      "name_en": "Pebble grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7033": {
+      "hex": "#7D8471",
+      "name_ru": "Цементно-серый",
+      "name_en": "Cement grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7034": {
+      "hex": "#8F8B66",
+      "name_ru": "Жёлто-серый",
+      "name_en": "Yellow grey",
+      "group": "7xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#938C62"
+    },
+    "RAL7035": {
+      "hex": "#D7D7D7",
+      "name_ru": "Светло-серый",
+      "name_en": "Light grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7036": {
+      "hex": "#7F7679",
+      "name_ru": "Платиново-серый",
+      "name_en": "Platinum grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7037": {
+      "hex": "#7D7F7D",
+      "name_ru": "Пыльно-серый",
+      "name_en": "Dusty grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7038": {
+      "hex": "#B5B8B1",
+      "name_ru": "Агатовый серый",
+      "name_en": "Agate grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7039": {
+      "hex": "#6C6960",
+      "name_ru": "Кварцевый серый",
+      "name_en": "Quartz grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7040": {
+      "hex": "#9DA1AA",
+      "name_ru": "Серое окно",
+      "name_en": "Window grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7042": {
+      "hex": "#8D948D",
+      "name_ru": "Транспортный серый A",
+      "name_en": "Traffic grey A",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7043": {
+      "hex": "#4E5452",
+      "name_ru": "Транспортный серый B",
+      "name_en": "Traffic grey B",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7044": {
+      "hex": "#CAC4B0",
+      "name_ru": "Серый шёлк",
+      "name_en": "Silk grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7045": {
+      "hex": "#909090",
+      "name_ru": "Телегрей 1",
+      "name_en": "Telegrey 1",
+      "group": "7xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#928E8E"
+    },
+    "RAL7046": {
+      "hex": "#82898F",
+      "name_ru": "Телегрей 2",
+      "name_en": "Telegrey 2",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7047": {
+      "hex": "#D0D0D0",
+      "name_ru": "Телегрей 4",
+      "name_en": "Telegrey 4",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL7048": {
+      "hex": "#898176",
+      "name_ru": "Перламутровый мышино-серый",
+      "name_en": "Pearl mouse grey",
+      "group": "7xxx",
+      "catalog": []
+    },
+    "RAL8000": {
+      "hex": "#826C34",
+      "name_ru": "Зелёно-коричневый",
+      "name_en": "Green brown",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL8001": {
+      "hex": "#955F20",
+      "name_ru": "Охра коричневая",
+      "name_en": "Ochre brown",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL8002": {
+      "hex": "#6C3B2A",
+      "name_ru": "Сигнальный коричневый",
+      "name_en": "Signal brown",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL8003": {
+      "hex": "#734222",
+      "name_ru": "Глиняный коричневый",
+      "name_en": "Clay brown",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL8004": {
+      "hex": "#8E402A",
+      "name_ru": "Медно-коричневый",
+      "name_en": "Copper brown",
+      "group": "8xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#B96648",
+      "reference": "RAL8004.webp",
+      "color_description": "Теплый насыщенный красно-коричневый оттенок",
+      "hex_metal": "#B36345",
+      "hex_fabric": "#BE694B"
+    },
+    "RAL8007": {
+      "hex": "#59351F",
+      "name_ru": "Олень коричневый",
+      "name_en": "Fawn brown",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL8008": {
+      "hex": "#6F4F28",
+      "name_ru": "Оливково-коричневый",
+      "name_en": "Olive brown",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL8011": {
+      "hex": "#5B3A29",
+      "name_ru": "Орехово-коричневый",
+      "name_en": "Nut brown",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL8012": {
+      "hex": "#592321",
+      "name_ru": "Красно-коричневый",
+      "name_en": "Red brown",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL8014": {
+      "hex": "#382C1E",
+      "name_ru": "Сепия коричневый",
+      "name_en": "Sepia brown",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL8015": {
+      "hex": "#633A34",
+      "name_ru": "Каштаново-коричневый",
+      "name_en": "Chestnut brown",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL8016": {
+      "hex": "#4C2F27",
+      "name_ru": "Махагон коричневый",
+      "name_en": "Mahogany brown",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL8017": {
+      "hex": "#45322E",
+      "name_ru": "Шоколадно-коричневый",
+      "name_en": "Chocolate brown",
+      "group": "8xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#674D44"
+    },
+    "RAL8019": {
+      "hex": "#403A3A",
+      "name_ru": "Серо-коричневый",
+      "name_en": "Grey brown",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL8022": {
+      "hex": "#212121",
+      "name_ru": "Чёрно-коричневый",
+      "name_en": "Black brown",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL8023": {
+      "hex": "#A65E2E",
+      "name_ru": "Оранжево-коричневый",
+      "name_en": "Orange brown",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL8024": {
+      "hex": "#79553D",
+      "name_ru": "Бежево-коричневый",
+      "name_en": "Beige brown",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL8025": {
+      "hex": "#755C48",
+      "name_ru": "Бледно-коричневый",
+      "name_en": "Pale brown",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL8028": {
+      "hex": "#4E3B31",
+      "name_ru": "Терракотовый",
+      "name_en": "Terra brown",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL8029": {
+      "hex": "#763C28",
+      "name_ru": "Перламутровый медный",
+      "name_en": "Pearl copper",
+      "group": "8xxx",
+      "catalog": []
+    },
+    "RAL9001": {
+      "hex": "#FDF4E3",
+      "name_ru": "Кремово-белый",
+      "name_en": "Cream",
+      "group": "9xxx",
+      "catalog": []
+    },
+    "RAL9002": {
+      "hex": "#E7EBDA",
+      "name_ru": "Светло-серый",
+      "name_en": "Grey white",
+      "group": "9xxx",
+      "catalog": []
+    },
+    "RAL9003": {
+      "hex": "#F4F4F4",
+      "name_ru": "Сигнальный белый",
+      "name_en": "Signal white",
+      "group": "9xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#EBE9E9"
+    },
+    "RAL9004": {
+      "hex": "#282828",
+      "name_ru": "Сигнальный чёрный",
+      "name_en": "Signal black",
+      "group": "9xxx",
+      "catalog": []
+    },
+    "RAL9005": {
+      "hex": "#0A0A0A",
+      "name_ru": "Чёрный янтарь",
+      "name_en": "Jet black",
+      "group": "9xxx",
+      "catalog": [
+        "delo-design"
+      ],
+      "photo_hex": "#1B1A1A"
+    },
+    "RAL9006": {
+      "hex": "#A5A5A5",
+      "name_ru": "Бело-алюминиевый",
+      "name_en": "White aluminium",
+      "group": "9xxx",
+      "catalog": []
+    },
+    "RAL9007": {
+      "hex": "#8F8F8F",
+      "name_ru": "Тёмно-алюминиевый",
+      "name_en": "Grey aluminium",
+      "group": "9xxx",
+      "catalog": []
+    },
+    "RAL9010": {
+      "hex": "#FFFFFF",
+      "name_ru": "Белый",
+      "name_en": "Pure white",
+      "group": "9xxx",
+      "catalog": []
+    },
+    "RAL9011": {
+      "hex": "#1C1C1C",
+      "name_ru": "Графитно-чёрный",
+      "name_en": "Graphite black",
+      "group": "9xxx",
+      "catalog": []
+    },
+    "RAL9016": {
+      "hex": "#F6F6F6",
+      "name_ru": "Транспортный белый",
+      "name_en": "Traffic white",
+      "group": "9xxx",
+      "catalog": []
+    },
+    "RAL9017": {
+      "hex": "#1E1E1E",
+      "name_ru": "Транспортный чёрный",
+      "name_en": "Traffic black",
+      "group": "9xxx",
+      "catalog": []
+    },
+    "RAL9018": {
+      "hex": "#D7D7D7",
+      "name_ru": "Папирусно-белый",
+      "name_en": "Papyrus white",
+      "group": "9xxx",
+      "catalog": []
+    },
+    "RAL9022": {
+      "hex": "#9C9C9C",
+      "name_ru": "Перламутровый светло-серый",
+      "name_en": "Pearl light grey",
+      "group": "9xxx",
+      "catalog": []
+    },
+    "RAL9023": {
+      "hex": "#828282",
+      "name_ru": "Перламутровый тёмно-серый",
+      "name_en": "Pearl dark grey",
+      "group": "9xxx",
+      "catalog": []
+    }
+  }
+}
